@@ -1,0 +1,12 @@
+{
+  "name": "coolinary",
+  "displayName": "coolinary",
+  "expo": {
+    "name": "coolinary",
+    "slug": "coolinary",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
