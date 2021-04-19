@@ -7,6 +7,23 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "splash": {
+        "image": "./assets/ios/splash.png",
+        "resizeMode":"cover"
+      }
+    },
+    "android": {
+      "splash": {
+        "ldpi": "./assets/android/splash-port-ldpi.png",
+        "mdpi":"./assets/android/splash-port-mdpi.png",
+        "hdpi":"./assets/android/splash-port-hdpi.png",
+        "xhdpi":"./assets/android/splash-port-xhdpi.png",
+        "xxhdpi":"./assets/android/splash-port-xxhdpi.png",
+        "xxxhdpi":"./assets/android/splash-port-xxxhdpi.png",
+        "resizeMode":"cover"
+      }
+    }
   }
 }
