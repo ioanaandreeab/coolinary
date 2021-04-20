@@ -4,13 +4,12 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Icon } from '@ui-kitten/components';
 
 import Home from '../screens/Home';
-import Recipes from '../screens/Recipes';
 import SavedRecipes from '../screens/SavedRecipes';
 import Categories from '../screens/Categories';
 
 const TabNavigator = createBottomTabNavigator({
   Home: {
-    screen: Recipes,
+    screen: Home,
     navigationOptions: {
       tabBarIcon: ({ focused }) => (
         <Icon

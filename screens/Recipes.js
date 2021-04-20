@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
-import { SafeAreaView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, StyleSheet, ScrollView, View } from 'react-native';
 import axios from 'axios';
 import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
-
+import RecipeCard from '../components/RecipeCard'
 const BackIcon = (props) => (
     <Icon {...props} name='arrow-back' />
 );
 
-const Recipes = ({ navigation }) => {
-
+const Recipes = ({ categoryName, navigation }) => {
+    const [recipes, setRecipes] = useState([])
     useEffect(() => {
         axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood`)
             .then(res => {
-                console.log(res)
+                setRecipes(res.data.meals)
             })
     }, [])
     const navigateBack = () => {
@@ -25,12 +25,32 @@ const Recipes = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <TopNavigation title='Retete' alignment='center' accessoryLeft={BackAction} />
+            <TopNavigation style={styles.topNavigation} title='Retete' alignment='center' accessoryLeft={BackAction} />
             <Divider />
-            <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
-            </Layout>
+            <ScrollView>
+                <View>
+                    <Layout style={styles.topContainer}>
+                        {recipes.map(item => <RecipeCard key={item.idMeal} name={item.strMeal} photoUrl={item.strMealThumb} />)}
+                    </Layout>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 };
+
+const styles = StyleSheet.create({
+    topNavigation: {
+        marginTop: '5%'
+    },
+    topContainer: {
+        flex: 1,
+        paddingHorizontal: 8,
+        justifyContent: 'center',
+        marginTop: '5%'
+    },
+    card: {
+        flex: 1,
+        margin: 2,
+    }
+});
 export default Recipes;
