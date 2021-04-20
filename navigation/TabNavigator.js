@@ -2,6 +2,7 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Icon } from '@ui-kitten/components';
+import { StackNavigator } from './StackNavigator'
 
 import Home from '../screens/Home';
 import SavedRecipes from '../screens/SavedRecipes';
@@ -45,6 +46,12 @@ const TabNavigator = createBottomTabNavigator({
           fill={focused ? '#111' : '#939393'}
         />
       )
+    }
+  },
+  Recipes: {
+    screen: StackNavigator,
+    navigationOptions: {
+      tabBarVisible: false
     }
   }
 });

@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 import { Card, Layout, Text } from '@ui-kitten/components';
+import { withNavigation } from 'react-navigation';
+
 
 const CategoriesList = (props) => {
   const renderCardHeader = (url) => (
@@ -9,16 +11,20 @@ const CategoriesList = (props) => {
       source={{ uri: url }}
     />
   );
-  const openRecipesList = () => {
-    console.log('aici')
+  const openRecipesList = (category) => {
+    // console.log('aici', props.navigation, category)
+    // props.navigation.navigate('Recipes', { categoryName: category.strCategory })
+    props.navigation.navigate('Recipes', { screen: 'Recipes', params: { categoryName: category.strCategory } });
+
   }
+
   return (
     <ScrollView>
       <View>
         <Layout style={styles.topContainer} level='1'>
           <Text category='h2'>Categories</Text>
           {props.categories.length > 0 && props.categories.map((category, index) => (
-            <Card key={index} style={styles.card} header={() => renderCardHeader(category.strCategoryThumb)} onClick={() => openRecipesList()}>
+            <Card key={index} style={styles.card} header={() => renderCardHeader(category.strCategoryThumb)} onPress={() => openRecipesList(category)}>
               <Text category='h6'>{category.strCategory}</Text>
             </Card>
           ))}
@@ -40,4 +46,4 @@ const styles = StyleSheet.create({
     margin: 2,
   }
 });
-export default CategoriesList;
+export default withNavigation(CategoriesList);

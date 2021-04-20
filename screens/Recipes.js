@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, View } from 'react-native';
+import { withNavigation } from 'react-navigation';
+
 import axios from 'axios';
 import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 import RecipeCard from '../components/RecipeCard'
@@ -7,7 +9,8 @@ const BackIcon = (props) => (
     <Icon {...props} name='arrow-back' />
 );
 
-const Recipes = ({ categoryName, navigation }) => {
+const Recipes = ({ route, categoryName, navigation, ...props }) => {
+    console.log('rec', route)
     const [recipes, setRecipes] = useState([])
     useEffect(() => {
         axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood`)
@@ -16,11 +19,13 @@ const Recipes = ({ categoryName, navigation }) => {
             })
     }, [])
     const navigateBack = () => {
-        navigation.goBack();
+        // console.log('recipes')
+        //not working: navigation.goBack()
+        navigation.navigate('Categories');
     };
 
     const BackAction = () => (
-        <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+        <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()} />
     );
 
     return (
@@ -53,4 +58,4 @@ const styles = StyleSheet.create({
         margin: 2,
     }
 });
-export default Recipes;
+export default withNavigation(Recipes);
