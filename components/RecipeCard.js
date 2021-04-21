@@ -9,8 +9,7 @@ const RecipeCard = (recipe) => (
     <View>
         <Card style= {cardStyle}>
         <Image
-            style={styles.tinyLogo}
-            source={}
+            source={recipe.strMealThumb}
         />
         </Card>
     </View>
