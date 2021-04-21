@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, ImageBackground, } from 'react-native';
 import { Card, Layout, Text } from '@ui-kitten/components';
 
-const CategoriesList = ({ id, photoUrl, name }) => {
+const RecipeCard = ({ id, photoUrl, name }) => {
     const renderCardFooter = (url) => (
         <ImageBackground
             style={{ height: 128 }}
@@ -10,16 +10,16 @@ const CategoriesList = ({ id, photoUrl, name }) => {
         />
     );
     return (
-        <Card key={id} style={styles.card} footer={() => renderCardFooter(photoUrl)}>
+        <Card key={id} style={styles.card} 
+            footer={() => renderCardFooter(photoUrl)}>  
             <Text category='h6'>{name}</Text>
-        </Card>);
-
+        </Card>
+    );
 };
 
 const styles = StyleSheet.create({
     card: {
-        flex: 1,
         margin: 2,
     }
 });
-export default CategoriesList;
+export default RecipeCard;
