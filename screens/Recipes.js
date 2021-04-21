@@ -25,7 +25,7 @@ const Recipes = ({ route, navigation }) => {
             <ScrollView>
                 <View>
                     <Layout style={styles.topContainer}>
-                        {recipes && recipes.map(item => <RecipeCard key={item.idMeal} name={item.strMeal} photoUrl={item.strMealThumb} />)}
+                        {recipes && recipes.map(item => <RecipeCard key={item.idMeal} id={item.idMeal} name={item.strMeal} photoUrl={item.strMealThumb} />)}
                     </Layout>
                 </View>
             </ScrollView>
