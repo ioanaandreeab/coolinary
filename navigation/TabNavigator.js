@@ -33,11 +33,13 @@ const TabNavigator = createBottomTabNavigator({
         />
       )
     },
-    headerShown:false
+    headerShown: false
   },
   'Saved Recipes': {
     screen: SavedRecipes,
     navigationOptions: {
+      title: 'Save Recipes',
+      headerShown: true,
       tabBarIcon: ({ focused }) => (
         <Icon
           name="heart-outline"

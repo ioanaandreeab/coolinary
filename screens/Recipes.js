@@ -3,11 +3,8 @@ import { SafeAreaView, StyleSheet, ScrollView, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import axios from 'axios';
-import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { Divider, Layout } from '@ui-kitten/components';
 import RecipeCard from '../components/RecipeCard'
-const BackIcon = (props) => (
-    <Icon {...props} name='arrow-back' />
-);
 
 const Recipes = ({ route, navigation }) => {
     const category = navigation.state.params.params.categoryName;
@@ -41,7 +38,6 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 8,
         justifyContent: 'center',
-        marginTop: '5%'
     },
     card: {
         flex: 1,
