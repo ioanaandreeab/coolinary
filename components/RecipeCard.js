@@ -1,18 +1,25 @@
 import React from 'react';
-import { Card, Text } from '@ui-kitten/components';
-import { View, Image } from 'react-native';
+import { StyleSheet, ImageBackground, } from 'react-native';
+import { Card, Layout, Text } from '@ui-kitten/components';
 
-const cardStyle = { 
-    width: '80%'
-}
-const RecipeCard = (recipe) => (
-    <View>
-        <Card style= {cardStyle}>
-        <Image
-            source={recipe.strMealThumb}
+const CategoriesList = ({ id, photoUrl, name }) => {
+    const renderCardFooter = (url) => (
+        <ImageBackground
+            style={{ height: 128 }}
+            source={{ uri: url }}
         />
-        </Card>
-    </View>
-);
+    );
+    return (
+        <Card key={id} style={styles.card} footer={() => renderCardFooter(photoUrl)}>
+            <Text category='h6'>{name}</Text>
+        </Card>);
 
-export default RecipeCard;
+};
+
+const styles = StyleSheet.create({
+    card: {
+        flex: 1,
+        margin: 2,
+    }
+});
+export default CategoriesList;
