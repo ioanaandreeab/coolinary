@@ -15,7 +15,6 @@ const CategoriesList = (props) => {
     // console.log('aici', props.navigation, category)
     // props.navigation.navigate('Recipes', { categoryName: category.strCategory })
     props.navigation.navigate('Recipes', { screen: 'Recipes', params: { categoryName: category.strCategory } });
-
   }
 
   return (

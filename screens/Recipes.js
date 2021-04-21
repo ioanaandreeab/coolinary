@@ -9,33 +9,23 @@ const BackIcon = (props) => (
     <Icon {...props} name='arrow-back' />
 );
 
-const Recipes = ({ route, categoryName, navigation, ...props }) => {
-    console.log('rec', route)
+const Recipes = ({ route, navigation }) => {
+    const category = navigation.state.params.params.categoryName;
     const [recipes, setRecipes] = useState([])
     useEffect(() => {
-        axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood`)
+        axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
             .then(res => {
                 setRecipes(res.data.meals)
             })
     }, [])
-    const navigateBack = () => {
-        // console.log('recipes')
-        //not working: navigation.goBack()
-        navigation.navigate('Categories');
-    };
-
-    const BackAction = () => (
-        <TopNavigationAction icon={BackIcon} onPress={() => navigateBack()} />
-    );
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <TopNavigation style={styles.topNavigation} title='Retete' alignment='center' accessoryLeft={BackAction} />
             <Divider />
             <ScrollView>
                 <View>
                     <Layout style={styles.topContainer}>
-                        {recipes.map(item => <RecipeCard key={item.idMeal} name={item.strMeal} photoUrl={item.strMealThumb} />)}
+                        {recipes && recipes.map(item => <RecipeCard key={item.idMeal} name={item.strMeal} photoUrl={item.strMealThumb} />)}
                     </Layout>
                 </View>
             </ScrollView>
