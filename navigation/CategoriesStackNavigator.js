@@ -10,7 +10,8 @@ export const CategoriesStackNavigator = createAppContainer(
         Categories: {
             screen: Categories,
             navigationOptions: {
-                headerShown: false
+                title: 'Categories',
+                headerShown: true
             }
         },
         Recipes: {

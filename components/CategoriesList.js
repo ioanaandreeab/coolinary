@@ -21,7 +21,7 @@ const CategoriesList = (props) => {
     <ScrollView>
       <View>
         <Layout style={styles.topContainer} level='1'>
-          <Text category='h2'>Categories</Text>
+          {/* <Text category='h2'>Categories</Text> */}
           {props.categories.length > 0 && props.categories.map((category, index) => (
             <Card key={index} style={styles.card} header={() => renderCardHeader(category.strCategoryThumb)} onPress={() => openRecipesList(category)}>
               <Text category='h6'>{category.strCategory}</Text>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 8,
     justifyContent: 'center',
-    marginTop: '15%'
+
   },
   card: {
     flex: 1,

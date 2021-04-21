@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation';
 
 const RecipeCard = ({ id, photoUrl, name, navigation }) => {
     const openRecipe = () => {
-        navigation.navigate('RecipeDetails', { screen: 'RecipeDetails', params: {recipeId: id}});
+        navigation.navigate('RecipeDetails', { screen: 'RecipeDetails', params: { recipeId: id } });
     }
 
     const renderCardFooter = (url) => (
@@ -15,10 +15,10 @@ const RecipeCard = ({ id, photoUrl, name, navigation }) => {
         />
     );
     return (
-        <Card key={id} 
+        <Card key={id}
             onPress={() => openRecipe()}
-            style={styles.card} 
-            footer={() => renderCardFooter(photoUrl)}>  
+            style={styles.card}
+            footer={() => renderCardFooter(photoUrl)}>
             <Text category='h6'>{name}</Text>
         </Card>
     );
