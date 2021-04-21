@@ -23,7 +23,7 @@ const Home = () => {
 
   return(
     <Layout style={layoutStyle}>
-      <RecipeCard key={randomRecipe.idMeal} name={randomRecipe.strMeal} photoUrl={randomRecipe.strMealThumb}/>
+      <RecipeCard id={randomRecipe.idMeal} name={randomRecipe.strMeal} photoUrl={randomRecipe.strMealThumb}/>
       <Search/>   
     </Layout>
   );

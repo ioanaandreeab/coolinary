@@ -2,7 +2,6 @@ import React from 'react';
 import { Input, Button, Layout } from '@ui-kitten/components';
 import { View, Text, ScrollView } from 'react-native';
 import RecipeCard from '../components/RecipeCard';
-import Recipes from '../screens/Recipes';
 import axios from 'axios';
 
 const viewStyle = {
@@ -21,22 +20,29 @@ const baseURL = `https://www.themealdb.com/api/json/v1/1/search.php?s=`;
 
 const Search = () => {
     const [ searchTerm, setSearchTerm] = React.useState('');
-    const [ fetchedRecipes, setFetchedRecipes] = React.useState([]);
+    // const [ fetchedRecipes, setFetchedRecipes] = React.useState([]);
     const [ recipeCards, setRecipeCards] = React.useState([]);
 
     const triggerSearch = async () => {
-        await axios.get(`${baseURL}${searchTerm}`).then(res => {
-            setFetchedRecipes(res.data.meals);
-        }).catch(err => console.log(err));
-        getRecipeCards();
+        await axios.get(`${baseURL}${searchTerm}`)
+        .then(res => {
+            // setFetchedRecipes(res.data.meals);
+            getRecipeCards(res.data.meals);
+        })
+        .catch(err => console.log(err));
     }
 
-    const getRecipeCards = () => {
+    const getRecipeCards = (fetchedRecipes) => {
         let recipes = [];
+        if(!fetchedRecipes || fetchedRecipes.length <=0) {
+            setRecipeCards(<Text>No recipe found. Try other keywords.</Text>);
+            return;
+        }
         for(let recipe of fetchedRecipes) {
             recipes.push(
                 <RecipeCard 
-                    key={recipe.idMeal} 
+                    key={recipe.idMeal}
+                    id={recipe.idMeal} 
                     name={recipe.strMeal} 
                     photoUrl={recipe.strMealThumb}
                 />

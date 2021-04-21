@@ -11,12 +11,12 @@ const RecipeDetails = (props) => {
     const [recipe, setRecipe] = React.useState({});
     const [isStarred, setStarred] = React.useState(false);
     const [tooltipVisible, setTooltipVisible] = React.useState(false);
-
-    const urlToFetch = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${props.recipeId}`
+    const recipeId = props.navigation.state.params.params.recipeId;
+    const urlToFetch = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`
 
     useEffect(()=> {
       getRecipe();
-    },[props.recipeId]);
+    },[recipeId]);
 
     const toggleStarred = () => {
       setTooltipVisible(true)
@@ -32,12 +32,12 @@ const RecipeDetails = (props) => {
     }
 
     const storeRecipe = async (value) => {
-        await AsyncStorage.setItem(props.recipeId + "", JSON.stringify(recipe));
+        await AsyncStorage.setItem(recipeId + "", JSON.stringify(recipe));
     }
 
     const getRecipe = async () => {
       try {
-        const value = await AsyncStorage.getItem(props.recipeId + "");
+        const value = await AsyncStorage.getItem(recipeId + "");
         if (value !== null) {
           setRecipe(JSON.parse(value));
           setStarred(true);
@@ -52,7 +52,7 @@ const RecipeDetails = (props) => {
 
     const removeRecipe = async (value) => {
       try {
-        await AsyncStorage.removeItem(props.recipeId + "");
+        await AsyncStorage.removeItem(recipeId + "");
       } catch (e) {
         console.error(e)
       }
