@@ -15,7 +15,6 @@ const RecipeDetails = (props) => {
   const [isSaving, setSaving] = React.useState(false);
   const [isLoading, setLoading] = React.useState(true);
   const infiniteAnimationIconRef = React.useRef();
-
   const recipeId = props.navigation.state.params.params.recipeId;
   const urlToFetch = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`
 
@@ -59,7 +58,7 @@ const RecipeDetails = (props) => {
   const getRecipe = async () => {
     try {
       const value = await AsyncStorage.getItem(recipeId + "");
-      if (value !== null) {
+      if (value !== null || value !== undefined || value !== 'undefined') {
         setRecipe(JSON.parse(value));
         setLoading(false);
         setStarred(true);
@@ -161,12 +160,10 @@ const RecipeDetails = (props) => {
       <View style={styles.centered}>
         {loadingIcon()}
       </View>
-
     )
   } else {
     return (
       <ScrollView >
-
         <Image source={{ uri: recipe.strMealThumb }}
           style={styles.recipeImage} />
         <View style={styles.titleContainer} >
