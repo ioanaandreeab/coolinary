@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Text } from '@ui-kitten/components';
 import { View, StyleSheet } from 'react-native';
 
-const Counter = ({ timesCoocked, isDisabled, handleClick }) => {
+const Counter = ({ timesCooked, isDisabled, handleClick }) => {
 
     return (
         <View style={styles.counterContainer}>
@@ -13,7 +13,7 @@ const Counter = ({ timesCoocked, isDisabled, handleClick }) => {
                 style={styles.roundBtn}
             >+
         </Button>
-            <Text category="h6">{timesCoocked}</Text>
+            <Text category="h6">{timesCooked}</Text>
             <Button
                 appearance='ghost'
                 disabled={isDisabled}

@@ -36,19 +36,22 @@ const RecipeDetails = (props) => {
     }
   }
 
+  useEffect(()=>{
+    setSaving(true);
+    AsyncStorage.mergeItem(recipeId + "", JSON.stringify(recipe)).then(() =>  setSaving(false) );
+  }, [recipe.timesCooked])
+
   const updateRecipe = async (action) => {
 
     if (action === 'add') {
-      recipe.timesCoocked++;
+      setRecipe({ ...recipe, timesCooked: recipe.timesCooked + 1});
     } else {
-      if (recipe.timesCoocked > 0) {
-        recipe.timesCoocked--;
+      if (recipe.timesCooked > 0) {
+        setRecipe({ ...recipe, timesCooked: recipe.timesCooked - 1});
       }
     }
 
-    setSaving(true);
-    await AsyncStorage.mergeItem(props.recipeId + "", JSON.stringify(recipe));
-    setSaving(false)
+   
   }
 
   const storeRecipe = async (value) => {
@@ -60,7 +63,7 @@ const RecipeDetails = (props) => {
       const value = await AsyncStorage.getItem(recipeId + "");
       console.log(value)
       if (value === null) {
-        fetchRecipie();
+        fetchRecipe();
         setStarred(false);
         return;
       }
@@ -75,18 +78,18 @@ const RecipeDetails = (props) => {
     }
   }
 
-  const fetchRecipie = () => {
+  const fetchRecipe = () => {
     setLoading(true);
     axios.get(urlToFetch).then(res => {
       var recipe = res.data.meals[0];
-      recipe.timesCoocked = 0;
+      recipe.timesCooked = 0;
       setRecipe(recipe)
     }).then(() => setLoading(false));
   }
 
   const removeRecipe = async (value) => {
     try {
-      recipe.timesCoocked = 0;
+      recipe.timesCooked = 0;
       await AsyncStorage.removeItem(recipeId + "");
     } catch (e) {
       console.error(e)
@@ -142,7 +145,7 @@ const RecipeDetails = (props) => {
       return (
         <Layout style={{ marginTop: 5, padding: 10 }} level='3'>
           <Text style={{ textAlign: 'center', marginBottom: 5 }} category="p2">Times cooked</Text>
-          <Counter timesCoocked={recipe.timesCoocked} isDisabled={isSaving} handleClick={updateRecipe} />
+          <Counter timesCooked={recipe.timesCooked} isDisabled={isSaving} handleClick={updateRecipe} />
         </Layout>
       )
     }
