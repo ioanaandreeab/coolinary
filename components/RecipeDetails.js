@@ -19,7 +19,7 @@ const RecipeDetails = (props) => {
   const urlToFetch = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`
 
   useEffect(() => {
-    infiniteAnimationIconRef.current.startAnimation();
+    // infiniteAnimationIconRef.current.startAnimation();
     getRecipe();
   }, [recipeId]);
 
@@ -58,13 +58,19 @@ const RecipeDetails = (props) => {
   const getRecipe = async () => {
     try {
       const value = await AsyncStorage.getItem(recipeId + "");
+      console.log(value)
+      if (value === null) {
+        console.log('esti prost');
+        fetchRecipie();
+        setStarred(false);
+        return;
+      }
       if (value !== null || value !== undefined || value !== 'undefined') {
+        console.log('din memorie')
         setRecipe(JSON.parse(value));
         setLoading(false);
         setStarred(true);
-      } else {
-        fetchRecipie();
-        setStarred(false);
+        return;
       }
     } catch (e) {
       console.error(e);
@@ -77,8 +83,7 @@ const RecipeDetails = (props) => {
       var recipe = res.data.meals[0];
       recipe.timesCoocked = 0;
       setRecipe(recipe)
-      setLoading(false);
-    });
+    }).then(() => setLoading(false));
   }
 
   const removeRecipe = async (value) => {
@@ -147,7 +152,7 @@ const RecipeDetails = (props) => {
 
   const loadingIcon = () => (
     <Icon
-      ref={infiniteAnimationIconRef}
+      // ref={infiniteAnimationIconRef}
       animationConfig={{ cycles: Infinity }}
       width={70}
       fill={'#111'}
