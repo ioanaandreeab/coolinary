@@ -37,8 +37,13 @@ const RecipeDetails = (props) => {
   }
 
   useEffect(()=>{
+    if(isStarred) {
+    console.log('update');
     setSaving(true);
-    AsyncStorage.mergeItem(recipeId + "", JSON.stringify(recipe)).then(() =>  setSaving(false) );
+
+      AsyncStorage.mergeItem(recipeId + "", JSON.stringify(recipe)).then(() =>  setSaving(false) );
+
+    }
   }, [recipe.timesCooked])
 
   const updateRecipe = async (action) => {
