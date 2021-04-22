@@ -8,8 +8,6 @@ import RecipeCard from '../components/RecipeCard'
 
 const SavedRecipes = () => {
   const [recipes, setRecipes] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const infiniteAnimationIconRef = React.useRef();
 
   const getAllRecipes = async () => {
     try {
@@ -19,7 +17,6 @@ const SavedRecipes = () => {
           getMeal(key)
         }
       })
-      setIsLoading(false)
 
     } catch (error) {
       console.error(error)
@@ -36,40 +33,18 @@ const SavedRecipes = () => {
   }
 
   useEffect(() => {
-    setIsLoading(true)
-    infiniteAnimationIconRef.current.startAnimation();
-
     setRecipes([])
     getAllRecipes();
   }, [])
 
-  const loadingIcon = () => (
-    <Icon
-      ref={infiniteAnimationIconRef}
-      animationConfig={{ cycles: Infinity }}
-      width={70}
-      fill={'#111'}
-      height={70}
-      name='loader-outline' />
-  )
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Divider />
-      {isLoading ?
-        <View style={styles.centered}>
-          {loadingIcon()}
-        </View> :
-        <ScrollView stickyHeaderIndices={[0]} >
-          <Text style={styles.headerNav} category="h5">Saved Recipes</Text>
+        <ScrollView>
           <View>
             <Layout style={styles.topContainer}>
               {recipes && recipes.map(item => <RecipeCard key={_.uniqueId()} id={item.idMeal} name={item.strMeal} photoUrl={item.strMealThumb} />)}
             </Layout >
           </View>
         </ScrollView>
-      }
-    </SafeAreaView >
-
   )
 }
 const styles = StyleSheet.create({
@@ -77,7 +52,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 8,
     justifyContent: 'center',
-    marginTop: '5%'
   },
   centered: {
     flex: 1,

@@ -2,14 +2,13 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Icon } from '@ui-kitten/components';
-import { CategoriesStackNavigator } from './CategoriesStackNavigator'
-
-import Home from '../screens/Home';
-import SavedRecipes from '../screens/SavedRecipes';
+import { CategoriesStackNavigator } from './CategoriesStackNavigator';
+import { SavedRecipesStackNavigator } from './SavedRecipesStackNavigator';
+import { HomeStackNavigator } from './HomeStackNavigator';
 
 const TabNavigator = createBottomTabNavigator({
   Home: {
-    screen: Home,
+    screen: HomeStackNavigator,
     navigationOptions: {
       tabBarIcon: ({ focused }) => (
         <Icon
@@ -36,7 +35,7 @@ const TabNavigator = createBottomTabNavigator({
     headerShown: false
   },
   'Saved Recipes': {
-    screen: SavedRecipes,
+    screen: SavedRecipesStackNavigator,
     navigationOptions: {
       title: 'Save Recipes',
       headerShown: true,

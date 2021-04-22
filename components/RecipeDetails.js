@@ -60,13 +60,11 @@ const RecipeDetails = (props) => {
       const value = await AsyncStorage.getItem(recipeId + "");
       console.log(value)
       if (value === null) {
-        console.log('esti prost');
         fetchRecipie();
         setStarred(false);
         return;
       }
       if (value !== null || value !== undefined || value !== 'undefined') {
-        console.log('din memorie')
         setRecipe(JSON.parse(value));
         setLoading(false);
         setStarred(true);
