@@ -8,8 +8,7 @@ const randomRecipeURL = `https://www.themealdb.com/api/json/v1/1/random.php`;
 const layoutStyle = {
   flex: 1, 
   alignItems: 'center', 
-  justifyContent: 'flex-start',
-  marginTop: 50
+  justifyContent: 'flex-start'
 }
 
 const Home = () => { 
