@@ -6,7 +6,7 @@ import _, { get } from 'lodash';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RecipeCard from '../components/RecipeCard'
 
-const SavedRecipes = () => {
+const SavedRecipes = ({navigation}) => {
   const [recipes, setRecipes] = useState([]);
 
   const getAllRecipes = async () => {
@@ -31,10 +31,14 @@ const SavedRecipes = () => {
       setRecipes(prev => [...prev, { idMeal: mealResp.idMeal, strMeal: mealResp.strMeal, strMealThumb: mealResp.strMealThumb }])
     });
   }
-
   useEffect(() => {
     setRecipes([])
     getAllRecipes();
+    navigation.addListener('willFocus',()=>{
+      setRecipes([])
+      getAllRecipes();
+    })
+
   }, [])
 
   return (
